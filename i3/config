@@ -151,8 +151,12 @@ bar {
 }
 
 # Sreen brightness controls
-#bindsym F6 exec "light -A 5; notify-send 'brightness up'"
-#bindsym F5 exec "light -U 5; notify-send 'brightness down'"
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
+bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
+bindsym XF86AudioMute exec amixer -q set Master toggle
+
+bindsym XF86MonBrightnessUp exec xrandr --output eDP-1 --brightness $(echo "$(xrandr --verbose |grep Brightness |grep -o '[0-9].*')+0.1" | bc)
+bindsym XF86MonBrightnessDown exec xrandr --output eDP-1 --brightness $(echo "$(xrandr --verbose |grep Brightness |grep -o '[0-9].*')-0.1" | bc)
 
 
-exec_always feh --bg-fill ~/Papel-Parede/wallpaper.jpg
+exec_always feh --bg-fill $HOME/Papel-Parede/wallpaper.jpg
