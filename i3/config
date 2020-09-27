@@ -6,6 +6,7 @@ set $mod Mod4
 set $shell gnome-terminal
 set $menu dmenu_run
 set $barstatus i3status
+set $screen eDP-1
 
 font pango:monospace 12
 
@@ -155,8 +156,7 @@ bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
 
-bindsym XF86MonBrightnessUp exec xrandr --output eDP-1 --brightness $(echo "$(xrandr --verbose |grep Brightness |grep -o '[0-9].*')+0.1" | bc)
-bindsym XF86MonBrightnessDown exec xrandr --output eDP-1 --brightness $(echo "$(xrandr --verbose |grep Brightness |grep -o '[0-9].*')-0.1" | bc)
-
+bindsym XF86MonBrightnessUp exec xrandr --output $screen --brightness $(echo "$(xrandr --verbose --current | grep ^"$screen" -A5 | grep Brightness | tail -n1 | grep -o '[0-9].*')+0.1" | bc)
+bindsym XF86MonBrightnessDown exec xrandr --output $screen --brightness $(echo "$(xrandr --verbose --current | grep ^"$screen" -A5 | grep Brightness | tail -n1 | grep -o '[0-9].*')-0.1" | bc)
 
 exec_always feh --bg-fill $HOME/Papel-Parede/wallpaper.jpg
