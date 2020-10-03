@@ -160,3 +160,5 @@ bindsym XF86MonBrightnessUp exec xrandr --output $screen --brightness $(echo "$(
 bindsym XF86MonBrightnessDown exec xrandr --output $screen --brightness $(echo "$(xrandr --verbose --current | grep ^"$screen" -A5 | grep Brightness | tail -n1 | grep -o '[0-9].*')-0.1" | bc)
 
 exec_always feh --bg-fill $HOME/Papel-Parede/wallpaper.jpg
+
+bindsym Print exec gnome-screenshot -i
