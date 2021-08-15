@@ -1,0 +1,24 @@
+set encoding=utf-8
+set textwidth=160
+set colorcolumn=+1
+
+set number
+set numberwidth=5
+set wrap
+
+execute pathogen#infect()
+set t_Co=256
+set background=dark
+set termguicolors
+set ignorecase
+syntax on
+filetype plugin indent on
+colorscheme gruvbox
+autocmd ColorScheme * highlight CocErrorFloat guifg=#ffffff
+autocmd ColorScheme * highlight CocInfoFloat guifg=#ffffff
+autocmd ColorScheme * highlight CocWarningFloat guifg=#ffffff
+autocmd ColorScheme * highlight SignColumn guibg=#adadad
+nnoremap <S-Up> :m-2<CR>
+nnoremap <S-Down> :m+<CR>
+inoremap <S-Up> <Esc>:m-2<CR>
+inoremap <S-Down> <Esc>:m+<CR>
