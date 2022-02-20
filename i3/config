@@ -162,3 +162,5 @@ bindsym XF86MonBrightnessDown exec xrandr --output $screen --brightness $(echo "
 exec_always feh --bg-fill $HOME/Papel-Parede/wallpaper.jpg
 
 bindsym Print exec gnome-screenshot -i
+
+exec "setxkbmap -layout us -variant intl"
