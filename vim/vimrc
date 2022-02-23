@@ -1,40 +1,47 @@
 set encoding=utf-8
 set textwidth=160
 set colorcolumn=+1
-
 set number
 set numberwidth=5
 set wrap
+set autoread
+"set cursorcolumn
+"set cursorline
+set noshowmode
 
 execute pathogen#infect()
-set t_Co=256
 set background=dark
 set termguicolors
 set ignorecase
 syntax on
 filetype plugin indent on
-
-
-" Normal
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-
-" Insert
-inoremap <C-j> <ESC>:m .+1<CR>==gi
-inoremap <C-k> <ESC>:m .-2<CR>==gi
-
-" Visual
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
-
-
 colorscheme gruvbox
 autocmd ColorScheme * highlight CocErrorFloat guifg=#ffffff
 autocmd ColorScheme * highlight CocInfoFloat guifg=#ffffff
 autocmd ColorScheme * highlight CocWarningFloat guifg=#ffffff
 autocmd ColorScheme * highlight SignColumn guibg=#adadad
+map <C-y> :w !xclip -sel c <CR><CR>
 
 
+map <C-a> <ESC>^
+imap <C-a> <ESC>I
+map <C-e> <ESC>$
+imap <C-e> <ESC>A
+inoremap <M-f> <ESC><Space>Wi
+inoremap <M-b> <Esc>Bi
+inoremap <M-d> <ESC>cW
 
+" Normal mode
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
 
+" Insert mode
+inoremap <C-j> <ESC>:m .+1<CR>==gi
+inoremap <C-k> <ESC>:m .-2<CR>==gi
+
+" Visual mode 
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+
+map <C-n> :NERDTreeToggle<CR>
 
