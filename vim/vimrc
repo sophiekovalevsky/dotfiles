@@ -1,3 +1,5 @@
+set showmatch
+
 set encoding=utf-8
 set textwidth=160
 set colorcolumn=+1
@@ -5,10 +7,10 @@ set number
 set numberwidth=5
 set wrap
 set autoread
+set relativenumber
 "set cursorcolumn
 "set cursorline
 set noshowmode
-
 execute pathogen#infect()
 set background=dark
 set termguicolors
@@ -20,9 +22,8 @@ autocmd ColorScheme * highlight CocErrorFloat guifg=#ffffff
 autocmd ColorScheme * highlight CocInfoFloat guifg=#ffffff
 autocmd ColorScheme * highlight CocWarningFloat guifg=#ffffff
 autocmd ColorScheme * highlight SignColumn guibg=#adadad
+"Automate process to download xclip
 map <C-y> :w !xclip -sel c <CR><CR>
-
-
 map <C-a> <ESC>^
 imap <C-a> <ESC>I
 map <C-e> <ESC>$
@@ -42,6 +43,21 @@ inoremap <C-k> <ESC>:m .-2<CR>==gi
 " Visual mode 
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
+vnoremap y y$
 
-map <C-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 
+nnoremap gev :e $MYVIMRC<CR>
+nnoremap gsv :so $MYVIMRC<CR>
+
+nnoremap <C-c> "+y
+vnoremap <C-c> "+y
+nnoremap <C-p> "+p
+vnoremap <C-p> "+p
+
+inoremap <C-s> <esc>:w<cr>
+nnoremap <C-s> :w<cr>
+
+set rtp+=~/.fzf
+let mapleader = "f"
+nnoremap <silent> <leader>f :FZF<CR>
