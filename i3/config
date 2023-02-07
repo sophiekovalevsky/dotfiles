@@ -5,10 +5,10 @@
 set $mod Mod4
 set $shell gnome-terminal
 set $menu dmenu_run
-set $barstatus i3status
-set $screen eDP-1
 
-font pango:monospace 12
+set $barstatus python3 ~/REPOSITORIES/dotfiles/i3/bumblebee-status/bumblebee-status
+
+font pango:monospace 14
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -76,16 +76,16 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:"
-set $ws2 "2:"
-set $ws3 "3:"
-set $ws4 "4:"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "0"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -147,20 +147,34 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar
 bar {
-  status_command $barstatus --config ~/.config/i3/status.conf
+	status_command $barstatus -m nic -p nic.states=^down -p nic.format={ssid} -m disk -p disk.format={percent:05.02f}% \
+	-m battery-upower -m battery -p battery.interval=1m -m memory -p memory.format={percent:05.02f}% -m date time -p time.interval=1m -t solarized-powerline 
 	position top
+	colors {
+		background  #212121
+		statusline  #dddddd
+		separator   #666666
+		# class             border  backgr. text
+		focused_workspace   #2b83a6 #1cb055 #ffffff
+		active_workspace    #212121 #1cb055 #ffffff
+		inactive_workspace  #212121 #212121 #86888c
+		urgent_workspace    #d64e4e #d64e4e #ffffff
+		binding_mode        #229c56 #229c56 #ffffff
+	}
 }
-
-# Sreen brightness controls
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
-bindsym XF86AudioMute exec amixer -q set Master toggle
 
 bindsym XF86MonBrightnessUp exec xrandr --output $screen --brightness $(echo "$(xrandr --verbose --current | grep ^"$screen" -A5 | grep Brightness | tail -n1 | grep -o '[0-9].*')+0.1" | bc)
 bindsym XF86MonBrightnessDown exec xrandr --output $screen --brightness $(echo "$(xrandr --verbose --current | grep ^"$screen" -A5 | grep Brightness | tail -n1 | grep -o '[0-9].*')-0.1" | bc)
 
-exec_always feh --bg-fill $HOME/Papel-Parede/wallpaper.jpg
+exec_always feh --bg-fill ~/Pictures/wallpaper.JPG
 
 bindsym Print exec gnome-screenshot -i
 
-exec "setxkbmap -layout us -variant intl"
+exec_always "setxkbmap -layout us -variant intl"
+
+# xset doesn't come by installed by default
+exec_always xset s off
+exec_always xset -dpms
+exec_always xset s noblank
+
+bindsym $mod+Control+s exec --no-startup-id systemctl suspend
