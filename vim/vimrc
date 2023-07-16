@@ -58,6 +58,13 @@ vnoremap <C-p> "+p
 inoremap <C-s> <esc>:w<cr>
 nnoremap <C-s> :w<cr>
 
+
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+nnoremap N nzz
+noremap n nzz
+
 set rtp+=~/.fzf
 let mapleader = "f"
 nnoremap <silent> <leader>f :FZF<CR>
