@@ -1,5 +1,6 @@
 set showmatch
 
+set guifont=Monaco:h14
 set encoding=utf-8
 set textwidth=160
 set colorcolumn=+1
@@ -10,18 +11,19 @@ set autoread
 set relativenumber
 "set cursorcolumn
 "set cursorline
-set noshowmode
+"set noshowmode
 execute pathogen#infect()
 set background=dark
 set termguicolors
 set ignorecase
 syntax on
 filetype plugin indent on
-colorscheme gruvbox
-autocmd ColorScheme * highlight CocErrorFloat guifg=#ffffff
-autocmd ColorScheme * highlight CocInfoFloat guifg=#ffffff
-autocmd ColorScheme * highlight CocWarningFloat guifg=#ffffff
-autocmd ColorScheme * highlight SignColumn guibg=#adadad
+colorscheme everforest
+"colorscheme gruvbox
+"autocmd ColorScheme * highlight CocErrorFloat guifg=#ffffff
+"autocmd ColorScheme * highlight CocInfoFloat guifg=#ffffff
+"autocmd ColorScheme * highlight CocWarningFloat guifg=#ffffff
+"autocmd ColorScheme * highlight SignColumn guibg=#adadad
 "Automate process to download xclip
 map <C-y> :w !xclip -sel c <CR><CR>
 map <C-a> <ESC>^
@@ -58,13 +60,16 @@ vnoremap <C-p> "+p
 inoremap <C-s> <esc>:w<cr>
 nnoremap <C-s> :w<cr>
 
+"set rtp+=~/.fzf
+"let mapleader = "f"
+"nnoremap <silent> <leader>f :FZF<CR>
 
+" n denotes Normal mode 
+nmap cp :let @" = expand("%:p")<CR>
+
+" Half page / Center
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 
 nnoremap N nzz
 noremap n nzz
-
-set rtp+=~/.fzf
-let mapleader = "f"
-nnoremap <silent> <leader>f :FZF<CR>
